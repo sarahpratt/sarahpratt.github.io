@@ -718,6 +718,7 @@
         // Game Logic
         const gameData = {
             robotEnabled: true,
+            typewriterShown: false,
             rounds: [
                 {
                     target: 'platypus',
@@ -905,7 +906,19 @@
 
             // Start typewriter effect
             if (gameData.robotEnabled) {
-                startTypewriter();
+                if (!gameData.typewriterShown) {
+                    startTypewriter();
+                    gameData.typewriterShown = true;
+                } else {
+                    // If typewriter already shown, just display the full text immediately
+                    const round = gameData.rounds[gameData.currentRound];
+                    const fullText = round.descriptions.join('\n');
+                    const textElement = document.getElementById('typewriterText');
+                    if (textElement) {
+                        textElement.innerHTML = fullText.replace(new RegExp(round.targetName, 'g'), 
+                            `<span class="highlight">${round.targetName}</span>`);
+                    }
+                }
             }
         }
 
@@ -969,25 +982,24 @@
                 polaroid.appendChild(indicator);
             }
             
-            // Show correct answer if wrong
-            if (!gameData.isCorrect) {
-                const correctPolaroid = document.getElementById(`polaroid-${round.target}`);
-                const correctPhoto = document.getElementById(`photo-${round.target}`);
-                correctPhoto.classList.add('correct-answer');
-                
-                const correctIndicator = document.createElement('div');
-                correctIndicator.className = 'indicator';
-                correctIndicator.innerHTML = '✓';
-                correctPolaroid.appendChild(correctIndicator);
-            }
 
             // Move to next round after delay, loop back to beginning
-            setTimeout(() => {
-                gameData.currentRound = (gameData.currentRound + 1) % gameData.rounds.length;
-                gameData.selectedAnimal = null;
-                gameData.isCorrect = null;
-                renderGame();
-            }, 2000);
+            if (gameData.isCorrect) {
+                setTimeout(() => {
+                    gameData.currentRound = (gameData.currentRound + 1) % gameData.rounds.length;
+                    gameData.selectedAnimal = null;
+                    gameData.isCorrect = null;
+                    gameData.typewriterShown = false;
+                    renderGame();
+                }, 2000);
+            } else {
+                // If incorrect, reset selection after delay so they can try again
+                setTimeout(() => {
+                    gameData.selectedAnimal = null;
+                    gameData.isCorrect = null;
+                    renderGame();
+                }, 2000);
+            }
         }
 
         function resetGame() {
