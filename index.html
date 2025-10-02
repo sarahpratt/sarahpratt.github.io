@@ -747,29 +747,29 @@
                     ]
                 },
                 {
-                    target: 'englishsetter',
+                    target: 'english setter',
                     targetName: 'English Setter',
                     descriptions: [
                         'An English Setter has a long, silky coat that is white with black or liver-colored spots'
                     ],
                     options: [
-                        { id: 'englishsetter', imagePath: 'images/englishsetter.JPEG' },
+                        { id: 'english setter', imagePath: 'images/englishsetter.JPEG' },
                         { id: 'vizsla', imagePath: 'images/vizsla.JPEG' },
                         { id: 'schipperke', imagePath: 'images/schipperke.JPEG' },
                         { id: 'kelpie', imagePath: 'images/kelpie.JPEG' }
                     ]
                 },
                 {
-                    target: 'sulpherbutterfly',
+                    target: 'sulpher butterfly',
                     targetName: 'Sulpher Butterfly',
                     descriptions: [
                         'A Sulphur Butterfly has wings that are yellow with black spots'
                     ],
                     options: [
-                        { id: 'lycaenidbutterfly', imagePath: 'images/lycaenid.JPEG' },
-                        { id: 'ringletbutterfly', imagePath: 'images/ringlet.JPEG' },
-                        { id: 'monarchbutterfly', imagePath: 'images/monarch.JPEG' },
-                        { id: 'sulpherbutterfly', imagePath: 'images/sulpher.JPEG' }
+                        { id: 'lycaenid butterfly', imagePath: 'images/lycaenid.JPEG' },
+                        { id: 'ringlet butterfly', imagePath: 'images/ringlet.JPEG' },
+                        { id: 'monarch butterfly', imagePath: 'images/monarch.JPEG' },
+                        { id: 'sulpher butterfly', imagePath: 'images/sulpher.JPEG' }
                     ]
                 },
                 {
@@ -961,7 +961,14 @@
             // Update UI
             const polaroid = document.getElementById(`polaroid-${animalId}`);
             const photoArea = document.getElementById(`photo-${animalId}`);
-            
+
+            // Find the animal name from the options
+            const selectedOption = round.options.find(opt => opt.id === animalId);
+            const animalName = selectedOption.id.replace(/([A-Z])/g, ' $1').trim()
+                .split(' ')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+
             if (gameData.isCorrect) {
                 polaroid.classList.add('correct');
                 photoArea.classList.add('correct-answer');
@@ -981,6 +988,12 @@
                 indicator.innerHTML = '✗';
                 polaroid.appendChild(indicator);
             }
+
+            // Add label showing what animal was clicked
+            const label = document.createElement('div');
+            label.style.cssText = 'position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; font-family: "Space Mono", monospace; font-size: 14px; color: #2d2d2d;';
+            label.textContent = animalName;
+            polaroid.appendChild(label);
             
 
             // Move to next round after delay, loop back to beginning
