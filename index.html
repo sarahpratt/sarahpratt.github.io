@@ -1,245 +1,966 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Sarah Pratt Personal Webpage</title>
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarah Pratt - Academic Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f0;
+            color: #2d2d2d;
+            line-height: 1.6;
+        }
 
-    </head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">
-                <span class="d-block d-lg-none">Sarah Pratt</span>
-                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/profile.jpg" alt="" /></span>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Publications</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#talks">Talks</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#teaching">Teaching</a></li>
-                    <!-- <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests</a></li> -->
-                </ul>
+        /* Navigation */
+        nav {
+            background: #2d2d2d;
+            padding: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 20px 30px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        nav a:hover {
+            background: #404040;
+        }
+
+        /* Game Header Section */
+        .game-header {
+            background-color: #f0f0e8;
+            padding: 100px 20px 60px;
+            border-bottom: 3px solid #2d2d2d;
+        }
+
+        .game-section {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Game Styles - Matching Original */
+        .game-progress {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+
+        .progress-box, .score-box {
+            background: white;
+            padding: 8px 16px;
+            border: 2px solid #2d2d2d;
+            font-family: 'Space Mono', monospace;
+            font-weight: bold;
+        }
+
+        .game-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .game-title h1 {
+            font-size: 48px;
+            font-weight: 900;
+            color: #2d2d2d;
+            margin-bottom: 10px;
+        }
+
+        .game-title p {
+            color: #2d2d2d;
+            font-size: 16px;
+        }
+
+        /* Robot and Speech Bubble */
+        .robot-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
+            padding: 0 20px;
+        }
+
+        .robot-svg {
+            flex-shrink: 0;
+        }
+
+        .speech-bubble-container {
+            position: relative;
+        }
+
+        .bubble-tail {
+            position: absolute;
+            left: -20px;
+            top: 35px;
+            width: 0;
+            height: 0;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-right: 20px solid #2d2d2d;
+        }
+
+        .speech-bubble {
+            background: white;
+            border: 3px solid #2d2d2d;
+            padding: 30px;
+            width: 650px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+        }
+
+        .bubble-text {
+            font-size: 18px;
+            line-height: 1.8;
+            font-family: 'Space Mono', monospace;
+            white-space: pre-line;
+        }
+
+        .highlight {
+            background-color: #ffd700;
+            padding: 0 4px;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 12px;
+            height: 20px;
+            background: #2d2d2d;
+            margin-left: 4px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Polaroid Cards */
+        .polaroid-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            align-items: start;
+            padding: 0 20px;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 12px;
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+            border: 3px solid #2d2d2d;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .polaroid:hover:not(.disabled) {
+            transform: translateY(-8px);
+        }
+
+        .polaroid.correct {
+            transform: rotate(3deg);
+        }
+
+        .polaroid.incorrect {
+            transform: rotate(-3deg);
+        }
+
+        .polaroid.disabled {
+            cursor: not-allowed;
+        }
+
+        .photo-area {
+            background: #e8e8e8;
+            border: 2px solid #2d2d2d;
+            height: 160px;
+            width: 192px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            margin-bottom: 12px;
+        }
+
+        .photo-area.correct-answer {
+            background: #90ee90;
+        }
+
+        .photo-area.incorrect-answer {
+            background: #ffb6c1;
+        }
+
+        .polaroid-bottom {
+            height: 32px;
+        }
+
+        .indicator {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #90ee90;
+            border: 3px solid #2d2d2d;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .indicator.incorrect {
+            background: #ff6b6b;
+        }
+
+        /* Game Complete */
+        .game-complete {
+            background: white;
+            padding: 48px;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            border: 4px solid #2d2d2d;
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.3);
+        }
+
+        .game-complete h2 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .score-display {
+            font-size: 60px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .reset-btn {
+            background: #2d2d2d;
+            color: white;
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .reset-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.3);
+        }
+
+        /* Main Content Sections */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section {
+            margin-bottom: 80px;
+            background: white;
+            border: 3px solid #2d2d2d;
+            padding: 40px;
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.1);
+        }
+
+        /* About Section with Polaroid Photo */
+        .about-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .profile-polaroid {
+            background: white;
+            padding: 20px;
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.3);
+            border: 3px solid #2d2d2d;
+            margin-top: 20px;
+            align-items: center;
+        }
+
+        .profile-photo {
+            background: #e8e8e8;
+            border: 2px solid #2d2d2d;
+            height: 280px;
+            width: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .profile-photo img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .profile-polaroid-bottom {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            color: #666;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2d2d2d;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin: 40px 0 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #2d2d2d;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 20px 0 10px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* Publication Cards */
+        .publication {
+            background: #fafafa;
+            border: 2px solid #2d2d2d;
+            padding: 25px;
+            margin-bottom: 25px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .publication:hover {
+            transform: translateX(8px);
+            box-shadow: -4px 4px 0px rgba(0,0,0,0.2);
+        }
+
+        .year-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #2d2d2d;
+            color: white;
+            padding: 5px 15px;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+        }
+
+        .publication-links {
+            margin-top: 15px;
+        }
+
+        .publication-links a {
+            display: inline-block;
+            margin-right: 15px;
+            padding: 8px 15px;
+            background: white;
+            color: #2d2d2d;
+            text-decoration: none;
+            border: 2px solid #2d2d2d;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .publication-links a:hover {
+            background: #2d2d2d;
+            color: white;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #2d2d2d;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            background: #2d2d2d;
+            color: white;
+        }
+
+        .contact-link {
+            /* To ensure the link can fill the container */
+            display: block; 
+            
+            /* Optional: Remove default link styles (underline, color) */
+            text-decoration: none; 
+            color: inherit; /* Keep the text color the same as the parent */
+
+            /* 2. Make it fill 100% of the parent contact-item's width and height */
+            width: 100%;
+            height: 100%;
+
+            /* Optional: If you want to center the text or apply any padding */
+            padding: 15px; /* Adjust this to match any existing padding on contact-item */
+            box-sizing: border-box; /* To ensure padding doesn't push the link out */
+        }
+
+        /* Footer */
+        footer {
+            background: #2d2d2d;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            .robot-section {
+                flex-direction: column;
+            }
+            .speech-bubble {
+                width: 100%;
+                max-width: 600px;
+            }
+            .polaroid-container {
+                flex-wrap: wrap;
+            }
+            nav ul {
+                flex-wrap: wrap;
+            }
+            nav a {
+                padding: 15px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#game">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#teaching">Teaching</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Game Header -->
+    <header id="game" class="game-header">
+        <div class="game-section">
+            <div id="gameContainer">
+                <!-- Game will be dynamically rendered here -->
             </div>
-        </nav>
-        <!-- Page Content-->
-        <div class="container-fluid p-0">
-            <!-- About-->
-            <section class="resume-section" id="about">
-                <div class="resume-section-content">
-                    <h1 class="mb-0">
-                        <span class="text-primary">Sarah Pratt</span>
-                    </h1>
-                    <div class="subheading mb-0">
-                        Third Year PhD, University of Washington
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="about-content">
+                <div class="profile-polaroid">
+                    <div class="profile-photo">
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <img src="images/sarah.JPG" alt="Sarah Pratt" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
                     </div>
-                    <div class="mb-5">spratt3 [at] cs [dot] washington [dot] edu </div>
-                    <p class="lead mb-5">
-                    I am a PhD student working with <a href="https://homes.cs.washington.edu/~ali/">Ali Farhadi</a>. I am interested in Machine Learning and Computer Vision. My past work is in vision and language.
-
-                    Previously, I worked on the <a href="https://prior.allenai.org/">PRIOR team</a> at <a href="https://allenai.org/">The Allen Institute for AI</a> under the mentorship of  <a href="https://anikem.github.io/">Ani Kembhavi</a>, <a href="https://lucaweihs.github.io/">Luca Weihs</a>, and <a href="http://markyatskar.com/">Mark Yatskar</a>.
-
-                    I completed my undergraduate degree in Applied Mathematics and Computer Science at Brown University in Providence, RI with academic advisor <a href="http://www.dam.brown.edu/people/cklivans/">Caroline Klivans</a>. </p>
-
-                    <p>
-                    <a href="https://twitter.com/sarahmhpratt">
-                    <img border="0" alt="W3Schools" src="assets/img/t.png" width="50" height="50">
-                    </a>
-                    <a href="https://github.com/sarahpratt">
-                    <img border="0" alt="W3Schools" src="assets/img/github.png" width="50" height="50">
-                    </a>
-                    <a href="https://scholar.google.com/citations?user=cNXj4QwAAAAJ&hl=en">
-                    <img border="0" alt="W3Schools" src="assets/img/scholar.png" width="45" height="45">
-                    </a>
+                    <div class="profile-polaroid-bottom">
+                        Lisbon, Portugal • 2025
+                    </div>
+                </div>
+                <div>
+                    <h1>Sarah Pratt</h1>
+                    <p class="subtitle">Sixth Year PhD Student • University of Washington</p>
+                    
+                    <p style="font-size: 16px; margin: 20px 0;">
+                        I am a PhD student working with <strong>Ali Farhadi</strong> at UW. I am interested in Machine Learning 
+                        and Computer Vision. My past work is in vision and language.
+                    </p>
+                    
+                    <p style="font-size: 16px; margin: 20px 0;">
+                        Previously, I worked on the <strong>PRIOR team</strong> at <strong>The Allen Institute for AI</strong> 
+                        under the mentorship of Ani Kembhavi, Luca Weihs, and Mark Yatskar.
+                    </p>
+                    
+                    <p style="font-size: 16px; margin: 20px 0;">
+                        I completed my undergraduate degree in Applied Mathematics and Computer Science at Brown University 
+                        with academic advisor Caroline Klivans.
+                    </p>
+                    
+                    <p style="font-size: 16px; margin: 20px 0;">
+                        <strong>Email:</strong> spratt3 [at] cs [dot] washington [dot] edu
                     </p>
                 </div>
-            </section>
-            <hr class="m-0" />
-            <!-- Experience-->
-            <section class="resume-section" id="experience">
-              <p>
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Publications</h2>
+            </div>
+        </section>
 
+        <!-- Publications Section -->
+        <section id="publications" class="section">
+            <h2><span class="highlight">Selected Publications</span></h2>
 
-										<div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                      <img border="0" alt="W3Schools" src="assets/img/cupl_thumbnail.png" width="270" height="270"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">	What does a platypus look like? Generating customized prompts for zero-shot image classification </h3>
-                            <div class="subheading mb-0"> 2023 &nbsp&nbsp [<a href="assets/cupl.pdf"> updated pdf </a>] &nbsp&nbsp [<a href="https://arxiv.org/abs/2209.03320"> arxiv </a>] &nbsp&nbsp [<a href="https://github.com/sarahpratt/CuPL"> code </a>]</div>
-                            <p> <b>Sarah Pratt</b>, <a href="https://iancovert.com/">Ian Covert</a>, <a href="https://rosanneliu.com/">Rosanne Liu</a>, <a href="https://homes.cs.washington.edu/~ali/">Ali Farhadi</a> </p>
-														<p> This work combines open vocabulary models with large language models (LLMs) to create Customized Prompts via Language models (CuPL, pronounced "couple"). In particular, we leverage the knowledge contained in LLMs in order to generate many descriptive sentences that are used to perform zero-shot image classification with open vocabulary models. We find that this straightforward and general approach improves accuracy on a range of zero-shot image classification benchmarks, including over one percentage point gain on ImageNet. Finally, this simple baseline requires no additional training and remains completely zero-shot. </p>
-                        </div>
-                    </div>
-
-
-										<div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                      <img border="0" alt="W3Schools" src="assets/img/introspective_thumbnail.png" width="270" height="270"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">	The Introspective Agent: Interdependence of Strategy, Physiology, and Sensing for Embodied Agents </h3>
-                            <div class="subheading mb-0"> 2022 &nbsp&nbsp [<a href="https://arxiv.org/abs/2201.00411"> arxiv </a>] &nbsp&nbsp [<a href="https://github.com/sarahpratt/introspective"> code </a>]</div>
-                            <p> <b>Sarah Pratt</b>, <a href="https://lucaweihs.github.io/">Luca Weihs</a>, <a href="https://homes.cs.washington.edu/~ali/">Ali Farhadi</a></p>
-														<p> While traditional embodied agents manipulate an environment to best achieve a goal, we argue for an introspective agent, which considers its own abilities in the context of its environment. We show that different environments yield vastly different optimal designs, and increasing long-term planning is often far less beneficial than other improvements, such as increased physical ability. </p>
-                        </div>
-                    </div>
-
-
-										<div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                      <img border="0" alt="W3Schools" src="assets/img/hs_thumnail.png" width="270" height="270"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">	Learning Generalizable Visual Representations via Interactive Gameplay </h3>
-                            <div class="subheading mb-0">Oral Presentation at ICLR 2021 &nbsp&nbsp [<a href="https://arxiv.org/abs/1912.08195"> arxiv </a>]</div>
-                            <p> <a href="https://lucaweihs.github.io/">Luca Weihs</a>, <a href="https://anikem.github.io/">Ani Kembhavi</a>, <a href="https://ehsanik.github.io/">Kiana Ehsani</a>, <b>Sarah Pratt</b>, Winson Han, Alvaro Herrasti, Eric Kolve, Dustin Schwenk, <a href="https://roozbehm.info">Roozbeh Mottaghi</a>, <a href="https://homes.cs.washington.edu/~ali/">Ali Farhadi</a></p>
-                        </div>
-                    </div>
-
-
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                      <img border="0" alt="W3Schools" src="assets/img/GSR_thumbnail.png" width="270" height="310"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Grounded Situation Recognition </h3>
-                            <div class="subheading mb-0">Spotlight at ECCV 2020 &nbsp&nbsp [<a href="https://arxiv.org/abs/2003.12058"> arxiv </a>] &nbsp&nbsp [<a href="https://github.com/allenai/swig"> code </a>] &nbsp&nbsp [<a href="https://vision-explorer.allenai.org/grounded_situation_recognition"> demo </a>]</div>
-                            <p> <b>Sarah Pratt</b>,  <a href="http://markyatskar.com/"> Mark Yatskar </a>, <a href="https://lucaweihs.github.io/">Luca Weihs</a>, <a href="https://homes.cs.washington.edu/~ali/">Ali Farhadi</a>, <a href="https://anikem.github.io/">Ani Kembhavi</a></p>
-                            <p>Situation Recognition is the task of recognizing the activity happening in an image, the actors and objects involved in this activity, and the roles they play. Semantic roles describe how objects in the image participate in the activity described by the verb. While situation recognition addresses <i>what</i> is happening in an image, <i>who</i> is playing a part in this and <i>what</i> their roles are, it does not address a critical aspect of visual understanding: <b>where</b> the involved entities lie in the image. We address this shortcoming and present Grounded Situation Recognition (GSR), a task that builds upon situation recognition and requires one to not just identify the situation observed in the image but also visually ground the identified roles within the corresponding image.</p>
-                        </div>
-                    </div>
-
-
+            <div class="publication">
+                <span class="year-badge">2024</span>
+                <h3>Superposed decoding: Multiple generations from a single autoregressive inference pass</h3>
+                <p>Ethan Shen, Alan Fan, <strong>Sarah Pratt, </strong>Jae Sung Park, Matthew Wallingford, Sham Kakade, Ari Holtzman, Ranjay Krishna, Ali Farhadi, Aditya Kusupati</p>
+                <p> This work proposes Superposed Decoding, a new decoding algorithm that generates k drafts at the computation cost of one autoregressive inference pass.</p>
+                <div class="publication-links">
+                    <a href="https://arxiv.org/abs/2405.18400">arXiv</a>
                 </div>
-                </p>
-            </section>
+            </div>
 
-            <!-- Experience-->
-            <section class="resume-section" id="talks">
-                <p>
-                  <div class="resume-section-content">
-                      <h2 class="mb-5">Talks</h2>
-  
-  
-                                          <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <img border="0" alt="W3Schools" src="assets/img/cvpr2023.png" width="270" height="270"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                          <div class="flex-grow-1">
-                              <h3 class="mb-0">	Prompt Generation for Zero-Shot Image Classification </h3>
-                              <p>Detailing paper "What does a platypus look like? Generating customized prompts for zero-shot image classification" as well as other relavent works.</p>
-                              <div class="subheading mb-0">[<a href="assets/pratt_cvpr2023.pdf"> slides </a>]</div>
-                          </div>
-                      </div>
-  
-                  </div>
-                  </p>
-              </section>
-
-
-            <hr class="m-0" />
-            <!-- Education-->
-            <section class="resume-section" id="education">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Education</h2>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">University of Washington</h3>
-                            <div class="subheading mb-0">Third year PhD student</div>
-                            <div>Advisor: Ali Farhadi</div>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">September 2020 - Current</span></div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Brown University</h3>
-                            <div class="subheading mb-0">Bachelor of Science - Honors</div>
-                            <div>Joint Concentration in Computer Science and Applied Mathemetics</div>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">September 2014 - May 2018</span></div>
-                    </div>
+            <div class="publication">
+                <span class="year-badge">2024</span>
+                <h3>Can Language Models Use Forecasting Strategies?</h3>
+                <p><strong>Sarah Pratt</strong>, Seth Blumberg, Pietro Kreitlon Carolino, Meredith Ringel Morris</p>
+                <p> This work describes experiments using a novel dataset of real world events and associated human predictions, an evaluation metric to measure forecasting ability, and the accuracy of a number of different LLM based forecasting designs on the provided dataset.</p>
+                <div class="publication-links">
+                    <a href="https://arxiv.org/abs/2406.04446">arXiv</a>
                 </div>
-            </section>
-            <hr class="m-0" />
-            <!-- Teaching-->
-            <section class="resume-section" id="teaching">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Teaching</h2>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Teaching Assistant</h3>
-
-                            <div class="subheading mb-0">cse493: Deep Learning</div>
-                            <div>University of Washington</div>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">Spring 2018</span></div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Head Teaching Assistant</h3>
-
-                            <div class="subheading mb-0">cs022: Discrete Math and Probability</div>
-                            <div>Brown University</div>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">Spring 2018</span></div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Undergraduate Teaching Assistant</h3>
-                            <div class="subheading mb-0">cs015: Introduction to Object Oriented Programming</div>
-                            <div class="subheading mb-0">cs022: Discrete Math and Probability</div>
-                            <div>Brown University</div>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">Fall 2016, Spring 2017</span></div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Nonprofit tutoring</h3>
-                            <div class="subheading mb-0">Yleana Leadership Academy</div>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">Summer 2015</span></div>
-                    </div>
+            </div>
+            
+            <div class="publication">
+                <span class="year-badge">2023</span>
+                <h3>What does a platypus look like? Generating customized prompts for zero-shot image classification</h3>
+                <p><strong>Sarah Pratt</strong>, Ian Covert, Rosanne Liu, Ali Farhadi</p>
+                <p>This work combines open vocabulary models with large language models (LLMs) to create Customized Prompts via Language models (CuPL). We leverage the knowledge contained in LLMs to generate descriptive sentences for zero-shot image classification.</p>
+                <div class="publication-links">
+                    <a href="https://arxiv.org/abs/2209.03320">arXiv</a>
+                    <a href="https://arxiv.org/abs/2209.03320">Code</a>
+                    <a href="https://www.youtube.com/watch?v=mFB3UPzcfpI">Talk</a>
                 </div>
-            </section>
-            <hr class="m-0" />
+            </div>
 
-            <hr class="m-0" />
-            <!-- Interests-->
-            <!-- <section class="resume-section" id="interests">
-              <p>
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Interests</h2>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-                      <img border="0" alt="W3Schools" src="assets/img/flower.jpg" width="330" height="400"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        <div class="flex-grow-1">
-                              <p class="ex2"> Painting</p>
-                              <p class="ex2"> Hiking</p>
-                              <p class="ex2"> Cooking/Baking</p>
-                              <p class="ex2"> My Cats, Louise and Mousse</p>
-                        </div>
-                    </div>
+            <div class="publication">
+                <span class="year-badge">2022</span>
+                <h3>The Introspective Agent: Interdependence of Strategy, Physiology, and Sensing for Embodied Agents</h3>
+                <p><strong>Sarah Pratt</strong>, Luca Weihs, Ali Farhadi</p>
+                <p>We argue for an introspective agent, which considers its own abilities in the context of its environment. Different environments yield vastly different optimal designs.</p>
+                <div class="publication-links">
+                    <a href="https://arxiv.org/abs/2201.00411">arXiv</a>
+                    <a href="https://github.com/sarahpratt/introspective">Code</a>
                 </div>
-                </p>
-            </section> -->
+            </div>
 
-        </div>
+            <div class="publication">
+                <span class="year-badge">2021</span>
+                <h3>Learning Generalizable Visual Representations via Interactive Gameplay</h3>
+                <p>Luca Weihs, Ani Kembhavi, Kiana Ehsani, <strong>Sarah Pratt</strong>, Winson Han, Alvaro Herrasti, Eric Kolve, Dustin Schwenk, Roozbeh Mottaghi, Ali Farhadi</p>
+                <p style="font-style: italic;">Oral Presentation at ICLR 2021</p>
+                <div class="publication-links">
+                    <a href="https://arxiv.org/abs/1912.08195">arXiv</a>
+                </div>
+            </div>
 
-        <!-- Bootstrap core JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Third party plugin JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+            <div class="publication">
+                <span class="year-badge">2020</span>
+                <h3>Grounded Situation Recognition</h3>
+                <p><strong>Sarah Pratt</strong>, Mark Yatskar, Luca Weihs, Ali Farhadi, Ani Kembhavi</p>
+                <p style="font-style: italic;">Spotlight at ECCV 2020</p>
+                <p>Grounded Situation Recognition builds upon situation recognition and requires one to not just identify the situation observed in the image but also visually ground the identified roles within the corresponding image.</p>
+                <div class="publication-links">
+                    <a href="https://arxiv.org/abs/2003.12058">arXiv</a>
+                    <a href="https://github.com/allenai/swig">Code</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teaching Section -->
+        <section id="teaching" class="section">
+            <h2><span class="highlight">Teaching</span></h2>
+            
+            <div class="publication">
+                <h3>University of Washington</h3>
+                <p><strong>CSE 493: Deep Learning</strong> - Instructor (Autumn 2024)</p>
+                <p><strong>CSE 493: Deep Learning</strong> - Instructor (Winter 2024)</p>
+                <p><strong>CSE 493: Deep Learning</strong> - Teaching Assistant (Spring 2023)</p>
+            </div>
+            
+            <div class="publication">
+                <h3>Brown University</h3>
+                <p><strong>CS022: Discrete Math and Probability</strong> - Head Teaching Assistant (Spring 2018)</p>
+                <p><strong>CS022: Discrete Math and Probability</strong> - Teaching Assistant (Spring 2017)</p>
+                <p><strong>CS015: Introduction to Object Oriented Programming</strong> - Teaching Assistant (Fall 2016)</p>
+            </div>
+            
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <h2><span class="highlight">Contact</span></h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <a href="mailto:spratt3@cs.washington.edu" class="contact-link">
+                        <strong>Email</strong><br>
+                        spratt3@cs.<br>washington.edu
+                    </a>
+                </div>
+            
+                <div class="contact-item">
+                    <a href="https://x.com/sarahmhpratt" class="contact-link" target="_blank">
+                        <strong>Twitter</strong><br>
+                        @sarahmhpratt
+                    </a>
+                </div>
+            
+                <div class="contact-item">
+                    <a href="https://github.com/sarahpratt" class="contact-link" target="_blank">
+                        <strong>GitHub</strong><br>
+                        github.com/sarahpratt
+                    </a>
+                </div>
+            
+                <div class="contact-item">
+                    <a href="https://scholar.google.com/citations?user=cNXj4QwAAAAJ&hl=en" class="contact-link" target="_blank">
+                        <strong>Google Scholar</strong><br>
+                        Sarah Pratt
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
     <footer>
-  <p><small>&nbsp&nbsp &copy; Copyright 2020, Sarah Pratt. Template by <a href="https://startbootstrap.com/"> Start Bootstrap </small></a> </p>
-</footer>
+        <p>© 2024 Sarah Pratt.</p>
+    </footer>
+
+    <script>
+        // Game Logic
+        const gameData = {
+            rounds: [
+                {
+                    target: 'platypus',
+                    targetName: 'Platypus',
+                    descriptions: [
+                        'A Platypus is a small, amphibious mammal with a long snout, webbed feet, and a thick, furry coat'
+                    ],
+                    options: [
+                        { id: 'wombat', imagePath: 'images/wombat.JPEG' },
+                        { id: 'platypus', imagePath: 'images/platypus.JPEG' },
+                        { id: 'beaver', imagePath: 'images/beaver.JPEG' },
+                        { id: 'echidna', imagePath: 'images/echidna.JPEG' }
+                    ]
+                },
+                {
+                    target: 'lorikeet',
+                    targetName: 'Lorikeet',
+                    descriptions: [
+                        'A Lorikeet is a small, brightly colored parrot'
+                    ],
+                    options: [
+                        { id: 'cockatoo', imagePath: 'images/cockatoo.JPEG' },
+                        { id: 'coucal', imagePath: 'images/coucal.JPEG' },
+                        { id: 'quail', imagePath: 'images/quail.JPEG' },
+                        { id: 'lorikeet', imagePath: 'images/lorikeet.JPEG' }
+                    ]
+                },
+                {
+                    target: 'englishsetter',
+                    targetName: 'English Setter',
+                    descriptions: [
+                        'An English Setter has a long, silky coat that is white with black or liver-colored spots'
+                    ],
+                    options: [
+                        { id: 'englishsetter', imagePath: 'images/englishsetter.JPEG' },
+                        { id: 'vizsla', imagePath: 'images/vizsla.JPEG' },
+                        { id: 'schipperke', imagePath: 'images/schipperke.JPEG' },
+                        { id: 'kelpie', imagePath: 'images/kelpie.JPEG' }
+                    ]
+                },
+                {
+                    target: 'sulpherbutterfly',
+                    targetName: 'Sulpher Butterfly',
+                    descriptions: [
+                        'A sulphur butterfly has wings that are yellow with black spots'
+                    ],
+                    options: [
+                        { id: 'lycaenidbutterfly', imagePath: 'images/lycaenid.JPEG' },
+                        { id: 'ringletbutterfly', imagePath: 'images/ringlet.JPEG' },
+                        { id: 'monarchbutterfly', imagePath: 'images/monarch.JPEG' },
+                        { id: 'sulpherbutterfly', imagePath: 'images/sulpher.JPEG' }
+                    ]
+                },
+                {
+                    target: 'ferret',
+                    targetName: 'Black-Footed Ferret',
+                    descriptions: [
+                        'The Black-Footed Ferret has a black mask around its eyes and a black-tipped tail'
+                    ],
+                    options: [
+                        { id: 'weasel', imagePath: 'images/weasel.JPEG' },
+                        { id: 'ferret', imagePath: 'images/ferret.JPEG' },
+                        { id: 'mink', imagePath: 'images/mink.JPEG' },
+                        { id: 'marmot', imagePath: 'images/marmot.JPEG' }
+                    ]
+                },
+                {
+                    target: 'maltese',
+                    targetName: 'Maltese',
+                    descriptions: [
+                        'A Maltese is a small dog with long, silky white hair'
+                    ],
+                    options: [
+                        { id: 'maltese', imagePath: 'images/maltese.JPEG' },
+                        { id: 'chihuaua', imagePath: 'images/chihuaua.JPEG' },
+                        { id: 'beagle', imagePath: 'images/beagle.JPEG' },
+                        { id: 'bluetick', imagePath: 'images/bluetick.JPEG' }
+                    ]
+                },
+                {
+                    target: 'magpie',
+                    targetName: 'Magpie',
+                    descriptions: [
+                        'A Magpie has black and white feathers and a long tail'
+                    ],
+                    options: [
+                        { id: 'goldfinch', imagePath: 'images/goldfinch.JPEG' },
+                        { id: 'bulbul', imagePath: 'images/bulbul.JPEG' },
+                        { id: 'jay', imagePath: 'images/jay.JPEG' },
+                        { id: 'magpie', imagePath: 'images/magpie.JPEG' }
+                    ]
+                },
+                {
+                    target: 'newfoundland',
+                    targetName: 'Newfoundland',
+                    descriptions: [
+                        'A Newfoundland dog is a large, black, furry dog'
+                    ],
+                    options: [
+                        { id: 'greatpyrenees', imagePath: 'images/GreatPyrenees.JPEG' },
+                        { id: 'chow', imagePath: 'images/chow.JPEG' },
+                        { id: 'newfoundland', imagePath: 'images/Newfoundland.JPEG' },
+                        { id: 'samoyed', imagePath: 'images/Samoyed.JPEG' }
+                    ]
+                }
+            ],
+            currentRound: 0,
+            selectedAnimal: null,
+            isCorrect: null,
+            displayedText: ''
+        };
+
+        function renderGame() {
+            const container = document.getElementById('gameContainer');
+            const round = gameData.rounds[gameData.currentRound];
+            
+            container.innerHTML = `
+                <!-- Title -->
+                <div class="game-title">
+                    <h1>Find the <span class="highlight">${round.targetName}</span></h1>
+                    <p>Use the LLM descriptions to improve your own image recognition!</p>
+                </div>
+
+                <!-- Robot and Speech Bubble -->
+                <div class="robot-section">
+                    <div class="robot-svg">
+                        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <line x1="50" y1="10" x2="50" y2="25" stroke="#2d2d2d" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="50" cy="8" r="3" fill="#2d2d2d"/>
+                            <rect x="25" y="25" width="50" height="35" fill="white" stroke="#2d2d2d" stroke-width="3"/>
+                            <circle cx="37" cy="40" r="3" fill="#2d2d2d"/>
+                            <circle cx="63" cy="40" r="3" fill="#2d2d2d"/>
+                            <line x1="40" y1="50" x2="60" y2="50" stroke="#2d2d2d" stroke-width="2" stroke-linecap="round"/>
+                            <rect x="20" y="60" width="60" height="30" fill="white" stroke="#2d2d2d" stroke-width="3"/>
+                            <rect x="30" y="68" width="40" height="14" fill="#2d2d2d"/>
+                            <rect x="33" y="71" width="25" height="2" fill="#00ff00" class="animate-pulse"/>
+                            <rect x="33" y="75" width="20" height="2" fill="#ff00ff" class="animate-pulse" style="animation-delay: 0.3s"/>
+                            <rect x="33" y="79" width="22" height="2" fill="#00ffff" class="animate-pulse" style="animation-delay: 0.6s"/>
+                        </svg>
+                    </div>
+                    <div class="speech-bubble-container">
+                        <div class="bubble-tail"></div>
+                        <div class="speech-bubble">
+                            <p class="bubble-text" id="typewriterText"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Polaroid Options -->
+                <div class="polaroid-container" id="polaroidContainer">
+                    ${round.options.map(option => `
+                        <div class="polaroid ${gameData.selectedAnimal ? 'disabled' : ''}" 
+                             onclick="selectAnimal('${option.id}')"
+                             id="polaroid-${option.id}"
+                             style="position: relative;">
+                            <div class="photo-area" id="photo-${option.id}">
+                                <img src="${option.imagePath}" alt="${option.id}" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="polaroid-bottom"></div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <!-- Footer -->
+                <div style="text-align: center; margin-top: 60px;">
+                    <p style="color: #666; font-size: 14px; font-family: 'Space Mono', monospace;">
+                        All images from ImageNet.
+                    </p>
+                </div>
+            `;
+
+            // Start typewriter effect
+            startTypewriter();
+        }
+
+        function startTypewriter() {
+            const round = gameData.rounds[gameData.currentRound];
+            const fullText = round.descriptions.join('\n');
+            const textElement = document.getElementById('typewriterText');
+            let index = 0;
+            
+            const timer = setInterval(() => {
+                if (index < fullText.length) {
+                    // Build the displayed text with highlighting
+                    let displayText = fullText.slice(0, index + 1);
+                    displayText = displayText.replace(new RegExp(round.targetName, 'g'), 
+                        `<span class="highlight">${round.targetName}</span>`);
+                    
+                    textElement.innerHTML = displayText + '<span class="cursor"></span>';
+                    index++;
+                } else {
+                    clearInterval(timer);
+                    // Remove cursor when done
+                    textElement.innerHTML = fullText.replace(new RegExp(round.targetName, 'g'), 
+                        `<span class="highlight">${round.targetName}</span>`);
+                }
+            }, 30);
+        }
+
+        function selectAnimal(animalId) {
+            if (gameData.selectedAnimal) return;
+            
+            const round = gameData.rounds[gameData.currentRound];
+            gameData.selectedAnimal = animalId;
+            gameData.isCorrect = animalId === round.target;
+
+            // Update UI
+            const polaroid = document.getElementById(`polaroid-${animalId}`);
+            const photoArea = document.getElementById(`photo-${animalId}`);
+            
+            if (gameData.isCorrect) {
+                polaroid.classList.add('correct');
+                photoArea.classList.add('correct-answer');
+                
+                // Add check indicator
+                const indicator = document.createElement('div');
+                indicator.className = 'indicator';
+                indicator.innerHTML = '✓';
+                polaroid.appendChild(indicator);
+            } else {
+                polaroid.classList.add('incorrect');
+                photoArea.classList.add('incorrect-answer');
+                
+                // Add X indicator
+                const indicator = document.createElement('div');
+                indicator.className = 'indicator incorrect';
+                indicator.innerHTML = '✗';
+                polaroid.appendChild(indicator);
+            }
+            
+            // Show correct answer if wrong
+            if (!gameData.isCorrect) {
+                const correctPolaroid = document.getElementById(`polaroid-${round.target}`);
+                const correctPhoto = document.getElementById(`photo-${round.target}`);
+                correctPhoto.classList.add('correct-answer');
+                
+                const correctIndicator = document.createElement('div');
+                correctIndicator.className = 'indicator';
+                correctIndicator.innerHTML = '✓';
+                correctPolaroid.appendChild(correctIndicator);
+            }
+
+            // Move to next round after delay, loop back to beginning
+            setTimeout(() => {
+                gameData.currentRound = (gameData.currentRound + 1) % gameData.rounds.length;
+                gameData.selectedAnimal = null;
+                gameData.isCorrect = null;
+                renderGame();
+            }, 2000);
+        }
+
+        function resetGame() {
+            gameData.currentRound = 0;
+            gameData.selectedAnimal = null;
+            gameData.isCorrect = null;
+            gameData.displayedText = '';
+            renderGame();
+        }
+
+        // Initialize game on load
+        document.addEventListener('DOMContentLoaded', function() {
+            renderGame();
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
 </html>
