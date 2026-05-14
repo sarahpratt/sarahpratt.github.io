@@ -195,6 +195,36 @@
             box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
         }
 
+        .robot-toggle:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Robot idle animations */
+        .robot-eyes {
+            animation: lookAround 5s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        @keyframes lookAround {
+            0%, 30%   { transform: translateX(0); }
+            40%, 50%  { transform: translateX(-3px); }
+            60%, 75%  { transform: translateX(3px); }
+            85%, 100% { transform: translateX(0); }
+        }
+
+        .robot-bar {
+            animation: barPulse 1.4s ease-in-out infinite;
+        }
+
+        .robot-bar.b2 { animation-delay: 0.3s; }
+        .robot-bar.b3 { animation-delay: 0.6s; }
+
+        @keyframes barPulse {
+            0%, 100% { opacity: 0.4; }
+            50%      { opacity: 1; }
+        }
+
         .highlight {
             background-color: #ffd700;
             padding: 0 4px;
@@ -782,8 +812,6 @@
     <script>
         // Game Logic
         const gameData = {
-            robotEnabled: true,
-            typewriterShown: false,
             rounds: [
                 {
                     target: 'platypus',
@@ -893,7 +921,7 @@
             currentRound: 0,
             selectedAnimal: null,
             isCorrect: null,
-            displayedText: ''
+            descriptionShown: false
         };
 
         function renderGame() {
@@ -915,35 +943,28 @@
                                 <line x1="50" y1="10" x2="50" y2="25" stroke="#2d2d2d" stroke-width="3" stroke-linecap="round"/>
                                 <circle cx="50" cy="8" r="3" fill="#2d2d2d"/>
                                 <rect x="25" y="25" width="50" height="35" fill="white" stroke="#2d2d2d" stroke-width="3"/>
-                                ${gameData.robotEnabled ? 
-                                    `<circle cx="37" cy="40" r="3" fill="#2d2d2d"/>
-                                    <circle cx="63" cy="40" r="3" fill="#2d2d2d"/>` :
-                                    `<line x1="33" y1="40" x2="41" y2="40" stroke="#2d2d2d" stroke-width="2" stroke-linecap="round"/>
-                                    <line x1="59" y1="40" x2="67" y2="40" stroke="#2d2d2d" stroke-width="2" stroke-linecap="round"/>`
-                                }
+                                <g class="robot-eyes">
+                                    <circle cx="37" cy="40" r="3" fill="#2d2d2d"/>
+                                    <circle cx="63" cy="40" r="3" fill="#2d2d2d"/>
+                                </g>
                                 <line x1="40" y1="50" x2="60" y2="50" stroke="#2d2d2d" stroke-width="2" stroke-linecap="round"/>
                                 <rect x="20" y="60" width="60" height="30" fill="white" stroke="#2d2d2d" stroke-width="3"/>
                                 <rect x="30" y="68" width="40" height="14" fill="#2d2d2d"/>
-                                ${gameData.robotEnabled ? 
-                                    `<rect x="33" y="71" width="25" height="2" fill="#00ff00" class="animate-pulse"/>
-                                    <rect x="33" y="75" width="20" height="2" fill="#ff00ff" class="animate-pulse" style="animation-delay: 0.3s"/>
-                                    <rect x="33" y="79" width="22" height="2" fill="#00ffff" class="animate-pulse" style="animation-delay: 0.6s"/>` :
-                                    ''
-                                }
+                                <rect class="robot-bar b1" x="33" y="71" width="25" height="2" fill="#00ff00"/>
+                                <rect class="robot-bar b2" x="33" y="75" width="20" height="2" fill="#ff00ff"/>
+                                <rect class="robot-bar b3" x="33" y="79" width="22" height="2" fill="#00ffff"/>
                             </svg>
                         </div>
-                        <button class="robot-toggle" onclick="toggleRobot()">
-                            ${gameData.robotEnabled ? 'Turn Off' : 'Turn On'}
+                        <button class="robot-toggle" id="generateBtn" onclick="generateDescription()">
+                            Press to generate a description of a ${round.targetName}
                         </button>
                     </div>
-                    ${gameData.robotEnabled ? `
-                        <div class="speech-bubble-container">
-                            <div class="bubble-tail"></div>
-                            <div class="speech-bubble">
-                                <p class="bubble-text" id="typewriterText"></p>
-                            </div>
+                    <div class="speech-bubble-container">
+                        <div class="bubble-tail"></div>
+                        <div class="speech-bubble">
+                            <p class="bubble-text" id="typewriterText"></p>
                         </div>
-                    ` : ''}
+                    </div>
                 </div>
 
                 <!-- Polaroid Options -->
@@ -969,21 +990,16 @@
                 </div>
             `;
 
-            // Start typewriter effect
-            if (gameData.robotEnabled) {
-                if (!gameData.typewriterShown) {
-                    startTypewriter();
-                    gameData.typewriterShown = true;
-                } else {
-                    // If typewriter already shown, just display the full text immediately
-                    const round = gameData.rounds[gameData.currentRound];
-                    const fullText = round.descriptions.join('\n');
-                    const textElement = document.getElementById('typewriterText');
-                    if (textElement) {
-                        textElement.innerHTML = fullText.replace(new RegExp(round.targetName, 'g'), 
-                            `<span class="highlight">${round.targetName}</span>`);
-                    }
+            // If the user already generated this round's description, show it immediately.
+            if (gameData.descriptionShown) {
+                const fullText = round.descriptions.join('\n');
+                const textElement = document.getElementById('typewriterText');
+                if (textElement) {
+                    textElement.innerHTML = fullText.replace(new RegExp(round.targetName, 'g'),
+                        `<span class="highlight">${round.targetName}</span>`);
                 }
+                const btn = document.getElementById('generateBtn');
+                if (btn) btn.disabled = true;
             }
         }
 
@@ -1011,9 +1027,12 @@
             }, 30);
         }
 
-        function toggleRobot() {
-            gameData.robotEnabled = !gameData.robotEnabled;
-            renderGame();
+        function generateDescription() {
+            if (gameData.descriptionShown) return;
+            gameData.descriptionShown = true;
+            const btn = document.getElementById('generateBtn');
+            if (btn) btn.disabled = true;
+            startTypewriter();
         }
 
         function selectAnimal(animalId) {
@@ -1072,7 +1091,7 @@
                     gameData.currentRound = (gameData.currentRound + 1) % gameData.rounds.length;
                     gameData.selectedAnimal = null;
                     gameData.isCorrect = null;
-                    gameData.typewriterShown = false;
+                    gameData.descriptionShown = false;
                     renderGame();
                 }, 2000);
             } else {
@@ -1088,7 +1107,7 @@
             gameData.currentRound = 0;
             gameData.selectedAnimal = null;
             gameData.isCorrect = null;
-            gameData.displayedText = '';
+            gameData.descriptionShown = false;
             renderGame();
         }
 
