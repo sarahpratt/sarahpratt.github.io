@@ -66,7 +66,11 @@
 }
 
 \newcommand{\teachingitem}[1]{%
-    \hspace{12pt}{\small\color{darktext} #1}\par\vspace{1pt}%
+    \hspace{12pt}\parbox[t]{\dimexpr\textwidth-12pt}{\small\color{darktext} #1}\par\vspace{1pt}%
+}
+
+\newcommand{\teachingblurb}[1]{%
+    \hspace{24pt}\parbox[t]{\dimexpr\textwidth-24pt}{\small\color{darktext} #1}\par\vspace{2pt}%
 }
 
 \begin{document}
@@ -112,8 +116,7 @@
 
 \hspace{12pt}{\small\bfseries University of Washington}\par\vspace{1pt}
 \teachingitem{\textbf{CSE 493: Deep Learning} --- Instructor (Winter 2024, Autumn 2024, Winter 2026), TA (Spring 2023)}
-\teachingitem{Instructor for three terms of a 100+ student course, serving as the primary lecturer. Modernized the curriculum each term including development of new lectures on LLMs, scale, and multimodal foundation models. Led a team of ~6 TAs each quarter.}
-\teachingitem{Selected original lectures: \href{https://sarahpratt.github.io/assets/Lecture_\%20Scale.pdf}{Scale}, \href{https://sarahpratt.github.io/assets/Lecture_\%20LLMs\%20and\%20Foundation\%20Models.pdf}{LLMs and Foundation Models}, \href{https://sarahpratt.github.io/assets/Lecture_\%20Multimodal\%20Foundation\%20Models.pdf}{Multimodal Foundation Models}}
+\teachingblurb{Instructor for three terms of a 100+ student course, serving as the primary lecturer. Modernized the curriculum each term including development of new lectures on \href{https://sarahpratt.github.io/assets/Lecture_\%20LLMs\%20and\%20Foundation\%20Models.pdf}{LLMs}, \href{https://sarahpratt.github.io/assets/Lecture_\%20Scale.pdf}{scale}, and \href{https://sarahpratt.github.io/assets/Lecture_\%20Multimodal\%20Foundation\%20Models.pdf}{multimodal foundation models}. Led a team of ~6 TAs each quarter.}
 
 \vspace{3pt}
 \hspace{12pt}{\small\bfseries Brown University}\par\vspace{1pt}
