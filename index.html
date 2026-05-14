@@ -171,22 +171,21 @@
 
         .robot-toggle {
             margin-top: 0px;
-            padding: 6px 16px;
+            padding: 18px 32px;
             background-color: #2d2d2d;
             color: white;
-            border: 2px solid #2d2d2d;
+            border: 3px solid #2d2d2d;
             border-radius: 4px;
             font-family: 'Space Mono', monospace;
-            font-size: 11px;
+            font-size: 16px;
             font-weight: bold;
-            text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.2s ease;
             display: block;
             margin-left: auto;
             margin-right: auto;
-            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
         }
 
         .robot-toggle:hover {
@@ -247,6 +246,25 @@
         /* Generating state: more energetic */
         .generating .robot-svg { animation-duration: 0.6s; }
         .generating .robot-bar { animation-duration: 0.35s; }
+
+        .generating .robot-antenna {
+            transform-origin: 50px 25px;
+            animation: antennaWiggle 0.5s ease-in-out infinite;
+        }
+
+        .generating .antenna-tip {
+            animation: antennaGlow 0.6s ease-in-out infinite;
+        }
+
+        @keyframes antennaWiggle {
+            0%, 100% { transform: rotate(-12deg); }
+            50%      { transform: rotate(12deg); }
+        }
+
+        @keyframes antennaGlow {
+            0%, 100% { fill: #2d2d2d; r: 3; }
+            50%      { fill: #ffd700; r: 5; }
+        }
 
         .highlight {
             background-color: #ffd700;
@@ -962,8 +980,10 @@
                 <div class="robot-section" id="robotSection">
                     <div class="robot-svg">
                         <svg width="140" height="140" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <line x1="50" y1="10" x2="50" y2="25" stroke="#2d2d2d" stroke-width="3" stroke-linecap="round"/>
-                            <circle cx="50" cy="8" r="3" fill="#2d2d2d"/>
+                            <g class="robot-antenna">
+                                <line x1="50" y1="10" x2="50" y2="25" stroke="#2d2d2d" stroke-width="3" stroke-linecap="round"/>
+                                <circle class="antenna-tip" cx="50" cy="8" r="3" fill="#2d2d2d"/>
+                            </g>
                             <rect x="25" y="25" width="50" height="35" fill="white" stroke="#2d2d2d" stroke-width="3"/>
                             <g class="robot-eyes">
                                 <circle cx="37" cy="40" r="3" fill="#2d2d2d"/>
