@@ -1017,9 +1017,23 @@
         }
 
         function selectAnimal(animalId) {
-            if (gameData.selectedAnimal) return;
-            
+            // Block re-clicks only after a correct answer (while we wait to advance).
+            if (gameData.selectedAnimal && gameData.isCorrect) return;
+
             const round = gameData.rounds[gameData.currentRound];
+
+            // If the previous pick was wrong, clear its feedback before showing the new one.
+            if (gameData.selectedAnimal && !gameData.isCorrect) {
+                clearTimeout(gameData.pendingTimeout);
+                const prev = document.getElementById(`polaroid-${gameData.selectedAnimal}`);
+                const prevPhoto = document.getElementById(`photo-${gameData.selectedAnimal}`);
+                if (prev) {
+                    prev.classList.remove('incorrect');
+                    prev.querySelectorAll('.indicator, .selection-label').forEach(el => el.remove());
+                }
+                if (prevPhoto) prevPhoto.classList.remove('incorrect-answer');
+            }
+
             gameData.selectedAnimal = animalId;
             gameData.isCorrect = animalId === round.target;
 
@@ -1047,16 +1061,14 @@
                 polaroid.appendChild(indicator);
             }
 
-            // Add label showing what animal was clicked
             const label = document.createElement('div');
+            label.className = 'selection-label';
             label.style.cssText = 'position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; font-family: "Space Mono", monospace; font-size: 14px; color: #2d2d2d;';
             label.textContent = animalName;
             polaroid.appendChild(label);
-            
 
-            // Move to next round after delay, loop back to beginning
             if (gameData.isCorrect) {
-                setTimeout(() => {
+                gameData.pendingTimeout = setTimeout(() => {
                     gameData.currentRound = (gameData.currentRound + 1) % gameData.rounds.length;
                     gameData.selectedAnimal = null;
                     gameData.isCorrect = null;
@@ -1064,8 +1076,7 @@
                     renderGame();
                 }, 2000);
             } else {
-                // If incorrect, reset selection after delay so they can try again
-                setTimeout(() => {
+                gameData.pendingTimeout = setTimeout(() => {
                     gameData.selectedAnimal = null;
                     gameData.isCorrect = null;
                     renderGame();
