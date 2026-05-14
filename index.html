@@ -34,18 +34,21 @@
         }
 
         .nav-brand {
-            color: white;
+            color: #2d2d2d;
+            background: #ffd700;
             text-decoration: none;
-            padding: 20px 30px;
+            padding: 14px 18px;
+            margin-left: 20px;
             font-family: 'Space Mono', monospace;
-            font-size: 16px;
+            font-size: 22px;
             font-weight: 700;
             letter-spacing: 1px;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
         .nav-brand:hover {
-            background: #404040;
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.4);
         }
 
         nav ul {
@@ -247,18 +250,8 @@
         .generating .robot-svg { animation-duration: 0.6s; }
         .generating .robot-bar { animation-duration: 0.35s; }
 
-        .generating .robot-antenna {
-            transform-origin: 50px 25px;
-            animation: antennaWiggle 0.5s ease-in-out infinite;
-        }
-
         .generating .antenna-tip {
             animation: antennaGlow 0.6s ease-in-out infinite;
-        }
-
-        @keyframes antennaWiggle {
-            0%, 100% { transform: rotate(-12deg); }
-            50%      { transform: rotate(12deg); }
         }
 
         @keyframes antennaGlow {
@@ -455,13 +448,19 @@
         }
 
         .profile-polaroid-bottom {
-            height: 40px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Space Mono', monospace;
-            font-size: 14px;
-            color: #666;
+            font-size: 22px;
+            font-weight: 700;
+            color: #2d2d2d;
+        }
+
+        .profile-polaroid-bottom span {
+            background: #ffd700;
+            padding: 2px 8px;
         }
 
         h1 {
@@ -643,7 +642,7 @@
                         </div>
                     </div>
                     <div class="profile-polaroid-bottom">
-                        Sarah Pratt
+                        <span>Sarah Pratt</span>
                     </div>
                 </div>
                 <div>
