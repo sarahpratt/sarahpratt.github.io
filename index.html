@@ -29,16 +29,32 @@
             width: 100%;
             z-index: 1000;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
         }
-        
+
+        .nav-brand {
+            color: white;
+            text-decoration: none;
+            padding: 20px 30px;
+            font-family: 'Space Mono', monospace;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .nav-brand:hover {
+            background: #404040;
+        }
+
         nav ul {
             list-style: none;
             display: flex;
             justify-content: center;
-            max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         nav a {
             display: block;
             color: white;
@@ -49,7 +65,7 @@
             letter-spacing: 1px;
             transition: all 0.3s;
         }
-        
+
         nav a:hover {
             background: #404040;
         }
@@ -525,6 +541,7 @@
 <body>
     <!-- Navigation -->
     <nav>
+        <a href="#game" class="nav-brand">Sarah Pratt</a>
         <ul>
             <li><a href="#game">Home</a></li>
             <li><a href="#about">About</a></li>
@@ -554,9 +571,11 @@
                             <img src="images/sarah.JPG" alt="Sarah Pratt" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                     </div>
+                    <div class="profile-polaroid-bottom">
+                        Sarah Pratt
+                    </div>
                 </div>
                 <div>
-                    <h1>Sarah Pratt</h1>
                     <p class="subtitle">Sixth Year PhD Student • University of Washington</p>
                     
                     <p style="font-size: 16px; margin: 20px 0;">
@@ -596,6 +615,16 @@
             </div>
 
             <div class="publication">
+                <span class="year-badge">2025</span>
+                <h3>The Emergence of Complex Behavior in Large-Scale Ecological Environments</h3>
+                <p>J. Bejjani, C. Van Amburg, C. Wang, C. H. Su, <strong>Sarah Pratt</strong>, Y. Mazloumi, N. Khoshnevis, S. Kakade, K. Brantley, A. Walsman</p>
+                <p>Explores how physical scale and population size affect behaviors in simulated ecological environments.</p>
+                <div class="publication-links">
+                    <a href="https://arxiv.org/abs/2510.18221">arXiv</a>
+                </div>
+            </div>
+
+            <div class="publication">
                 <span class="year-badge">2024</span>
                 <h3>Superposed decoding: Multiple generations from a single autoregressive inference pass</h3>
                 <p>Ethan Shen, Alan Fan, <strong>Sarah Pratt, </strong>Jae Sung Park, Matthew Wallingford, Sham Kakade, Ari Holtzman, Ranjay Krishna, Ali Farhadi, Aditya Kusupati</p>
@@ -615,6 +644,28 @@
                 </div>
             </div>
             
+            <div class="publication">
+                <span class="year-badge">2024</span>
+                <h3>DataComp-LM: In Search of the Next Generation of Training Sets for Language Models</h3>
+                <p>J. Li, A. Fang, G. Smyrnis, M. Ivgi, M. Jordan, ... <strong>Sarah Pratt</strong>, ... V. Shankar (59 authors)</p>
+                <p style="font-style: italic;">NeurIPS 2024 (Datasets Track)</p>
+                <p>A testbed and benchmark for designing high-quality training sets for language models.</p>
+                <div class="publication-links">
+                    <a href="https://arxiv.org/abs/2406.11794">arXiv</a>
+                </div>
+            </div>
+
+            <div class="publication">
+                <span class="year-badge">2023</span>
+                <h3>DataComp: In Search of the Next Generation of Multimodal Datasets</h3>
+                <p>S. Y. Gadre, G. Ilharco, A. Fang, ... <strong>Sarah Pratt</strong>, ... L. Schmidt (34 authors)</p>
+                <p style="font-style: italic;">NeurIPS 2023 (Datasets Track)</p>
+                <p>A testbed for dataset experiments centered around a candidate pool of 12.8B image-text pairs for training CLIP models.</p>
+                <div class="publication-links">
+                    <a href="https://arxiv.org/abs/2304.14108">arXiv</a>
+                </div>
+            </div>
+
             <div class="publication">
                 <span class="year-badge">2023</span>
                 <h3>What does a platypus look like? Generating customized prompts for zero-shot image classification</h3>
@@ -667,6 +718,7 @@
             
             <div class="publication">
                 <h3>University of Washington</h3>
+                <p><strong>CSE 493: Deep Learning</strong> - Instructor (Winter 2026)</p>
                 <p><strong>CSE 493: Deep Learning</strong> - Instructor (Autumn 2024)</p>
                 <p><strong>CSE 493: Deep Learning</strong> - Instructor (Winter 2024)</p>
                 <p><strong>CSE 493: Deep Learning</strong> - Teaching Assistant (Spring 2023)</p>
@@ -740,10 +792,10 @@
                         'A Platypus is a small, amphibious mammal with a long snout, webbed feet, and a thick, furry coat'
                     ],
                     options: [
-                        { id: 'wombat', imagePath: 'images/wombat.JPEG' },
-                        { id: 'platypus', imagePath: 'images/platypus.JPEG' },
-                        { id: 'beaver', imagePath: 'images/beaver.JPEG' },
-                        { id: 'echidna', imagePath: 'images/echidna.JPEG' }
+                        { id: 'wombat', name: 'Wombat', imagePath: 'images/wombat.JPEG' },
+                        { id: 'platypus', name: 'Platypus', imagePath: 'images/platypus.JPEG' },
+                        { id: 'beaver', name: 'Beaver', imagePath: 'images/beaver.JPEG' },
+                        { id: 'echidna', name: 'Echidna', imagePath: 'images/echidna.JPEG' }
                     ]
                 },
                 {
@@ -753,10 +805,10 @@
                         'A Lorikeet is a small, brightly colored parrot'
                     ],
                     options: [
-                        { id: 'cockatoo', imagePath: 'images/cockatoo.JPEG' },
-                        { id: 'coucal', imagePath: 'images/coucal.JPEG' },
-                        { id: 'quail', imagePath: 'images/quail.JPEG' },
-                        { id: 'lorikeet', imagePath: 'images/lorikeet.JPEG' }
+                        { id: 'cockatoo', name: 'Cockatoo', imagePath: 'images/cockatoo.JPEG' },
+                        { id: 'coucal', name: 'Coucal', imagePath: 'images/coucal.JPEG' },
+                        { id: 'quail', name: 'Quail', imagePath: 'images/quail.JPEG' },
+                        { id: 'lorikeet', name: 'Lorikeet', imagePath: 'images/lorikeet.JPEG' }
                     ]
                 },
                 {
@@ -766,10 +818,10 @@
                         'An English Setter has a long, silky coat that is white with black or liver-colored spots'
                     ],
                     options: [
-                        { id: 'english setter', imagePath: 'images/englishsetter.JPEG' },
-                        { id: 'vizsla', imagePath: 'images/vizsla.JPEG' },
-                        { id: 'schipperke', imagePath: 'images/schipperke.JPEG' },
-                        { id: 'kelpie', imagePath: 'images/kelpie.JPEG' }
+                        { id: 'english setter', name: 'English Setter', imagePath: 'images/englishsetter.JPEG' },
+                        { id: 'vizsla', name: 'Vizsla', imagePath: 'images/vizsla.JPEG' },
+                        { id: 'schipperke', name: 'Schipperke', imagePath: 'images/schipperke.JPEG' },
+                        { id: 'kelpie', name: 'Kelpie', imagePath: 'images/kelpie.JPEG' }
                     ]
                 },
                 {
@@ -779,10 +831,10 @@
                         'A Sulphur Butterfly has wings that are yellow with black spots'
                     ],
                     options: [
-                        { id: 'lycaenid butterfly', imagePath: 'images/lycaenid.JPEG' },
-                        { id: 'ringlet butterfly', imagePath: 'images/ringlet.JPEG' },
-                        { id: 'monarch butterfly', imagePath: 'images/monarch.JPEG' },
-                        { id: 'sulphur butterfly', imagePath: 'images/sulphur.JPEG' }
+                        { id: 'lycaenid butterfly', name: 'Lycaenid Butterfly', imagePath: 'images/lycaenid.JPEG' },
+                        { id: 'ringlet butterfly', name: 'Ringlet Butterfly', imagePath: 'images/ringlet.JPEG' },
+                        { id: 'monarch butterfly', name: 'Monarch Butterfly', imagePath: 'images/monarch.JPEG' },
+                        { id: 'sulphur butterfly', name: 'Sulphur Butterfly', imagePath: 'images/sulphur.JPEG' }
                     ]
                 },
                 {
@@ -792,10 +844,10 @@
                         'The Black-Footed Ferret has a black mask around its eyes and a black-tipped tail'
                     ],
                     options: [
-                        { id: 'weasel', imagePath: 'images/weasel.JPEG' },
-                        { id: 'ferret', imagePath: 'images/ferret.JPEG' },
-                        { id: 'mink', imagePath: 'images/mink.JPEG' },
-                        { id: 'marmot', imagePath: 'images/marmot.JPEG' }
+                        { id: 'weasel', name: 'Weasel', imagePath: 'images/weasel.JPEG' },
+                        { id: 'ferret', name: 'Black-Footed Ferret', imagePath: 'images/ferret.JPEG' },
+                        { id: 'mink', name: 'Mink', imagePath: 'images/mink.JPEG' },
+                        { id: 'marmot', name: 'Marmot', imagePath: 'images/marmot.JPEG' }
                     ]
                 },
                 {
@@ -805,10 +857,10 @@
                         'A Maltese is a small dog with long, silky white hair'
                     ],
                     options: [
-                        { id: 'maltese', imagePath: 'images/maltese.JPEG' },
-                        { id: 'chihuaua', imagePath: 'images/chihuaua.JPEG' },
-                        { id: 'beagle', imagePath: 'images/beagle.JPEG' },
-                        { id: 'bluetick', imagePath: 'images/bluetick.JPEG' }
+                        { id: 'maltese', name: 'Maltese', imagePath: 'images/maltese.JPEG' },
+                        { id: 'chihuaua', name: 'Chihuahua', imagePath: 'images/chihuaua.JPEG' },
+                        { id: 'beagle', name: 'Beagle', imagePath: 'images/beagle.JPEG' },
+                        { id: 'bluetick', name: 'Bluetick', imagePath: 'images/bluetick.JPEG' }
                     ]
                 },
                 {
@@ -818,10 +870,10 @@
                         'A Magpie has black and white feathers and a long tail'
                     ],
                     options: [
-                        { id: 'goldfinch', imagePath: 'images/goldfinch.JPEG' },
-                        { id: 'bulbul', imagePath: 'images/bulbul.JPEG' },
-                        { id: 'jay', imagePath: 'images/jay.JPEG' },
-                        { id: 'magpie', imagePath: 'images/magpie.JPEG' }
+                        { id: 'goldfinch', name: 'Goldfinch', imagePath: 'images/goldfinch.JPEG' },
+                        { id: 'bulbul', name: 'Bulbul', imagePath: 'images/bulbul.JPEG' },
+                        { id: 'jay', name: 'Jay', imagePath: 'images/jay.JPEG' },
+                        { id: 'magpie', name: 'Magpie', imagePath: 'images/magpie.JPEG' }
                     ]
                 },
                 {
@@ -831,10 +883,10 @@
                         'A Newfoundland dog is a large, black, furry dog'
                     ],
                     options: [
-                        { id: 'greatpyrenees', imagePath: 'images/GreatPyrenees.JPEG' },
-                        { id: 'chow', imagePath: 'images/chow.JPEG' },
-                        { id: 'newfoundland', imagePath: 'images/Newfoundland.JPEG' },
-                        { id: 'samoyed', imagePath: 'images/Samoyed.JPEG' }
+                        { id: 'greatpyrenees', name: 'Great Pyrenees', imagePath: 'images/GreatPyrenees.JPEG' },
+                        { id: 'chow', name: 'Chow', imagePath: 'images/chow.JPEG' },
+                        { id: 'newfoundland', name: 'Newfoundland', imagePath: 'images/Newfoundland.JPEG' },
+                        { id: 'samoyed', name: 'Samoyed', imagePath: 'images/Samoyed.JPEG' }
                     ]
                 }
             ],
@@ -971,16 +1023,9 @@
             gameData.selectedAnimal = animalId;
             gameData.isCorrect = animalId === round.target;
 
-            // Update UI
             const polaroid = document.getElementById(`polaroid-${animalId}`);
             const photoArea = document.getElementById(`photo-${animalId}`);
-
-            // Find the animal name from the options
-            const selectedOption = round.options.find(opt => opt.id === animalId);
-            const animalName = selectedOption.id.replace(/([A-Z])/g, ' $1').trim()
-                .split(' ')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(' ');
+            const animalName = round.options.find(opt => opt.id === animalId).name;
 
             if (gameData.isCorrect) {
                 polaroid.classList.add('correct');

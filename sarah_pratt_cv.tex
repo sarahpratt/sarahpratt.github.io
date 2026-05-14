@@ -1,0 +1,176 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=0.85in,top=0.7in,bottom=0.7in]{geometry}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+
+% Tight paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+% Colors
+\definecolor{darktext}{HTML}{1a1a2e}
+\definecolor{gray}{HTML}{555555}
+\definecolor{lightgray}{HTML}{888888}
+\definecolor{linkblue}{HTML}{2563eb}
+\definecolor{rulecolor}{HTML}{cccccc}
+
+% Hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkblue,
+    urlcolor=linkblue,
+    pdfauthor={Sarah Pratt},
+    pdftitle={Sarah Pratt - CV}
+}
+
+% Section formatting
+\titleformat{\section}
+    {\normalsize\bfseries\scshape\color{darktext}}
+    {}
+    {0pt}
+    {}
+    [\vspace{2pt}{\color{rulecolor}\hrule height 0.6pt}\vspace{4pt}]
+\titlespacing*{\section}{0pt}{12pt}{2pt}
+
+% Remove page numbers
+\pagestyle{empty}
+
+% Commands
+\newcommand{\entry}[2]{%
+    \hspace{12pt}\parbox{\dimexpr\textwidth-12pt}{%
+        {\bfseries\color{darktext} #1}\par\vspace{1pt}%
+        {\small\color{gray}\textit{#2}}%
+    }\par\vspace{1pt}%
+}
+
+\newcommand{\entrydesc}[1]{%
+    \hspace{12pt}\parbox{\dimexpr\textwidth-12pt}{%
+        {\small\color{darktext} #1}%
+    }\par\vspace{8pt}%
+}
+
+\newcommand{\paper}[4]{%
+    % #1 = title (or \href{url}{title})
+    % #2 = authors + venue line
+    % #3 = blurb
+    % #4 = unused
+    \vspace{1pt}%
+    \hspace{12pt}\parbox{\dimexpr\textwidth-12pt}{%
+        {\bfseries\small\color{darktext} #1}\par\vspace{0pt}%
+        {\footnotesize\color{gray} #2}\par%
+        \ifx&#3&\else\vspace{0pt}{\footnotesize\color{gray} #3}\par\fi%
+    }\vspace{8pt}%
+}
+
+\newcommand{\teachingitem}[1]{%
+    \hspace{12pt}{\small\color{darktext} #1}\par\vspace{1pt}%
+}
+
+\begin{document}
+
+% Header
+\begin{center}
+    {\LARGE\bfseries\color{darktext} Sarah Pratt}\\[3pt]
+    {\small\color{gray} spratt3@cs.washington.edu\enspace$\cdot$\enspace\href{https://sarahpratt.github.io}{sarahpratt.github.io}\enspace$\cdot$\enspace\href{https://scholar.google.com/citations?user=cNXj4QwAAAAJ}{Google Scholar}\enspace$\cdot$\enspace\href{https://github.com/sarahpratt}{GitHub}}
+\end{center}
+\vspace{-2pt}
+
+% Research Interests
+\section*{Research Interests}
+
+\hspace{12pt}{\small Machine Learning, Computer Vision, Language Models, Inter-model Learning}
+
+% Education
+\section*{Education}
+
+\entry{University of Washington}{Sep 2020 -- Present (Expected Graduation: Summer 2026)}
+\entrydesc{Ph.D. Candidate in Computer Science $\cdot$ Advisor: Ali Farhadi}
+
+\entry{Brown University}{Sep 2014 -- Jun 2018}
+\entrydesc{Sc.B. in Applied Mathematics and Computer Science}
+
+% Research and Work Experience
+\section*{Research and Work Experience}
+
+\entry{Student Researcher, Google DeepMind}{Sep 2023 -- Jun 2024}
+\entrydesc{Investigated whether large language models can match human performance on real-world forecasting tasks, developing a novel evaluation framework and dataset. Mentored by Meredith Ringel Morris.}
+
+\entry{Student Researcher, Google Brain}{Sep 2022 -- 2023}
+\entrydesc{Developed CuPL (Customized Prompts via Language models), a method that leverages LLMs to generate rich descriptive prompts for zero-shot image classification, improving accuracy across benchmarks including ImageNet. Mentored by Rosanne Liu.}
+
+\entry{Predoctoral Young Investigator, Allen Institute for AI (AI2)}{Jan 2019 -- Aug 2020 $\cdot$ PRIOR Team}
+\entrydesc{Led work on Grounded Situation Recognition, a task requiring models to identify the activity in an image and localize all participating agents and objects. Mentored by Aniruddha Kembhavi, Luca Weihs, and Mark Yatskar. Resulting paper accepted as Spotlight at ECCV 2020.}
+
+\entry{Software Engineer, AgeLab --- MIT}{Sep 2018 -- Dec 2018}
+\entrydesc{Developed software to extract video clips from large recordings and display them to human annotators. Mentored by Bryan Reimer.}
+
+% Teaching
+\section*{Teaching}
+
+\hspace{12pt}{\small\bfseries University of Washington}\par\vspace{1pt}
+\teachingitem{\textbf{CSE 493: Deep Learning} --- Instructor (Winter 2024, Autumn 2024, Winter 2026), TA (Spring 2023)}
+\teachingitem{Selected lecture slides: \href{https://sarahpratt.github.io/assets/Lecture_\%20Scale.pdf}{Scale}, \href{https://sarahpratt.github.io/assets/Lecture_\%20LLMs\%20and\%20Foundation\%20Models.pdf}{LLMs and Foundation Models}, \href{https://sarahpratt.github.io/assets/Lecture_\%20Multimodal\%20Foundation\%20Models.pdf}{Multimodal Foundation Models}}
+
+\vspace{3pt}
+\hspace{12pt}{\small\bfseries Brown University}\par\vspace{1pt}
+\teachingitem{\textbf{CS022: Discrete Math and Probability} --- Head TA (Spring 2018), TA (Spring 2017)}
+\teachingitem{\textbf{CS015: Introduction to Object Oriented Programming} --- TA (Fall 2016)}
+
+% Selected Publications - new page
+\newpage
+\section*{Selected Publications}
+
+\paper{\href{https://sarahpratt.github.io/assets/aske_preprint.pdf}{Ask-E: An Environment for Calibrated Question Generation}}
+    {\textbf{Sarah M.\ Pratt}, J.\ S.\ Park, S.\ Geng, A.\ Farhadi\enspace$\cdot$\enspace\textit{In submission, NeurIPS 2026}}
+    {Introduces an environment where models generate questions calibrated to differentiate the skill levels of existing LLMs. Well-calibrated question generation requires all the skills of answering and more, but receives supervisory signal from the answering models themselves (in the form of successful capability differentiation), enabling supervision from models of equal or lesser ability.}
+    {}
+
+\paper{\href{https://arxiv.org/abs/2510.18221}{The Emergence of Complex Behavior in Large-Scale Ecological Environments}}
+    {J.\ Bejjani, C.\ Van Amburg, C.\ Wang, C.\ H.\ Su, \textbf{Sarah M.\ Pratt}, Y.\ Mazloumi, N.\ Khoshnevis, S.\ Kakade, K.\ Brantley, A.\ Walsman\enspace$\cdot$\enspace\textit{2025}}
+    {Explores how physical scale and population size affect behaviors in simulated ecological environments.}
+    {}
+
+\paper{\href{https://arxiv.org/abs/2405.18400}{Superposed Decoding: Multiple Generations from a Single Autoregressive Inference Pass}}
+    {E.\ Shen, A.\ Fan, \textbf{Sarah Pratt}, J.\ S.\ Park, M.\ Wallingford, S.\ Kakade, A.\ Holtzman, R.\ Krishna, A.\ Farhadi, A.\ Kusupati\enspace$\cdot$\enspace\textit{NeurIPS 2024}}
+    {A decoding algorithm that generates k drafts at the cost of a single autoregressive inference pass via superposition of token embeddings.}
+    {}
+
+\paper{\href{https://arxiv.org/abs/2406.04446}{Can Language Models Use Forecasting Strategies?}}
+    {\textbf{Sarah Pratt}, S.\ Blumberg, P.\ K.\ Carolino, M.\ R.\ Morris\enspace$\cdot$\enspace\textit{2024}}
+    {Investigates whether reasoning strategies shown to improve forecasting performance in humans also improve the performance of LLMs. Introduces a novel dataset derived from an internal prediction market to evaluate LLM-based forecasting approaches.}
+    {}
+
+\paper{\href{https://arxiv.org/abs/2406.11794}{DataComp-LM: In Search of the Next Generation of Training Sets for Language Models}}
+    {J.\ Li, A.\ Fang, G.\ Smyrnis, M.\ Ivgi, M.\ Jordan, \ldots\ \textbf{Sarah Pratt}, \ldots\ V.\ Shankar (59 authors)\enspace$\cdot$\enspace\textit{NeurIPS 2024 (Datasets Track)}}
+    {A testbed and benchmark for designing high-quality training sets for language models.}
+    {}
+
+\paper{\href{https://arxiv.org/abs/2304.14108}{DataComp: In Search of the Next Generation of Multimodal Datasets}}
+    {S.\ Y.\ Gadre, G.\ Ilharco, A.\ Fang, \ldots\ \textbf{Sarah Pratt}, \ldots\ L.\ Schmidt (34 authors)\enspace$\cdot$\enspace\textit{NeurIPS 2023 (Datasets Track)}}
+    {A testbed for dataset experiments centered around a candidate pool of 12.8B image-text pairs for training CLIP models.}
+    {}
+
+\paper{\href{https://arxiv.org/abs/2209.03320}{What Does a Platypus Look Like? Generating Customized Prompts for Zero-Shot Image Classification}}
+    {\textbf{Sarah Pratt}, I.\ Covert, R.\ Liu, A.\ Farhadi\enspace$\cdot$\enspace\textit{ICCV 2023}}
+    {Combines open-vocabulary vision models with LLMs to generate rich descriptive prompts for zero-shot image classification, improving accuracy across a range of benchmarks including over one percentage point on ImageNet.}
+    {}
+
+\paper{\href{https://arxiv.org/abs/2201.00411}{The Introspective Agent: Interdependence of Strategy, Physiology, and Sensing for Embodied Agents}}
+    {\textbf{Sarah Pratt}, L.\ Weihs, A.\ Farhadi\enspace$\cdot$\enspace\textit{2022}}
+    {Demonstrates that sensory and physical ability affect how much agents benefit from increased planning capacity, and reproduces the optimal ability combinations observed in biological organisms.}
+    {}
+
+\paper{\href{https://arxiv.org/abs/1912.08195}{Learning Generalizable Visual Representations via Interactive Gameplay}}
+    {L.\ Weihs, A.\ Kembhavi, K.\ Ehsani, \textbf{Sarah Pratt}, W.\ Han, A.\ Herrasti, E.\ Kolve, D.\ Schwenk, R.\ Mottaghi, A.\ Farhadi\enspace$\cdot$\enspace\textit{ICLR 2021 (Oral Presentation)}}
+    {Visual representations learned through interactive gameplay in simulated environments transfer effectively to downstream vision tasks.}
+    {}
+
+\paper{\href{https://arxiv.org/abs/2003.12058}{Grounded Situation Recognition}}
+    {\textbf{Sarah Pratt}, M.\ Yatskar, L.\ Weihs, A.\ Farhadi, A.\ Kembhavi\enspace$\cdot$\enspace\textit{ECCV 2020 (Spotlight)}}
+    {Extends situation recognition by requiring models to not only identify the activity in an image but also visually ground all participating roles, localizing the agents and objects involved in the action.}
+    {}
+
+\end{document}
