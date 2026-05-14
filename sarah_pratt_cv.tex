@@ -42,7 +42,7 @@
 \newcommand{\entry}[2]{%
     \hspace{12pt}\parbox{\dimexpr\textwidth-12pt}{%
         {\bfseries\color{darktext} #1}\par\vspace{1pt}%
-        {\small\color{gray}\textit{#2}}%
+        {\small\color{gray} #2}%
     }\par\vspace{1pt}%
 }
 
@@ -98,7 +98,7 @@
 \entry{Student Researcher, Google DeepMind}{Sep 2023 -- Jun 2024}
 \entrydesc{Investigated whether large language models can match human performance on real-world forecasting tasks, developing a novel evaluation framework and dataset. Mentored by Meredith Ringel Morris.}
 
-\entry{Student Researcher, Google Brain}{Sep 2022 -- 2023}
+\entry{Student Researcher, Google Brain}{Sep 2022 -- Mar 2023}
 \entrydesc{Developed CuPL (Customized Prompts via Language models), a method that leverages LLMs to generate rich descriptive prompts for zero-shot image classification, improving accuracy across benchmarks including ImageNet. Mentored by Rosanne Liu.}
 
 \entry{Predoctoral Young Investigator, Allen Institute for AI (AI2)}{Jan 2019 -- Aug 2020 $\cdot$ PRIOR Team}
@@ -124,52 +124,52 @@
 \section*{Selected Publications}
 
 \paper{\href{https://sarahpratt.github.io/assets/aske_preprint.pdf}{Ask-E: An Environment for Calibrated Question Generation}}
-    {\textbf{Sarah Pratt}, J.\ S.\ Park, S.\ Geng, A.\ Farhadi\enspace$\cdot$\enspace\textit{In submission, NeurIPS 2026}}
+    {\textbf{Sarah Pratt}, J.\ S.\ Park, S.\ Geng, A.\ Farhadi\enspace$\cdot$\enspace In submission, NeurIPS 2026}
     {Introduces an environment where models generate questions calibrated to differentiate the skill levels of existing LLMs. Well-calibrated question generation requires all the skills of answering and more, but receives supervisory signal from the answering models themselves (in the form of successful capability differentiation), enabling supervision from models of equal or lesser ability.}
     {}
 
 \paper{\href{https://arxiv.org/abs/2510.18221}{The Emergence of Complex Behavior in Large-Scale Ecological Environments}}
-    {J.\ Bejjani, C.\ Van Amburg, C.\ Wang, C.\ H.\ Su, \textbf{Sarah Pratt}, Y.\ Mazloumi, N.\ Khoshnevis, S.\ Kakade, K.\ Brantley, A.\ Walsman\enspace$\cdot$\enspace\textit{2025}}
+    {J.\ Bejjani, C.\ Van Amburg, C.\ Wang, C.\ H.\ Su, \textbf{Sarah Pratt}, Y.\ Mazloumi, N.\ Khoshnevis, S.\ Kakade, K.\ Brantley, A.\ Walsman\enspace$\cdot$\enspace2025}
     {Explores how physical scale and population size affect behaviors in simulated ecological environments.}
     {}
 
 \paper{\href{https://arxiv.org/abs/2405.18400}{Superposed Decoding: Multiple Generations from a Single Autoregressive Inference Pass}}
-    {E.\ Shen, A.\ Fan, \textbf{Sarah Pratt}, J.\ S.\ Park, M.\ Wallingford, S.\ Kakade, A.\ Holtzman, R.\ Krishna, A.\ Farhadi, A.\ Kusupati\enspace$\cdot$\enspace\textit{NeurIPS 2024}}
+    {E.\ Shen, A.\ Fan, \textbf{Sarah Pratt}, J.\ S.\ Park, M.\ Wallingford, S.\ Kakade, A.\ Holtzman, R.\ Krishna, A.\ Farhadi, A.\ Kusupati\enspace$\cdot$\enspace NeurIPS 2024}
     {A decoding algorithm that generates k drafts at the cost of a single autoregressive inference pass via superposition of token embeddings.}
     {}
 
 \paper{\href{https://arxiv.org/abs/2406.04446}{Can Language Models Use Forecasting Strategies?}}
-    {\textbf{Sarah Pratt}, S.\ Blumberg, P.\ K.\ Carolino, M.\ R.\ Morris\enspace$\cdot$\enspace\textit{2024}}
+    {\textbf{Sarah Pratt}, S.\ Blumberg, P.\ K.\ Carolino, M.\ R.\ Morris\enspace$\cdot$\enspace2024}
     {Investigates whether reasoning strategies shown to improve forecasting performance in humans also improve the performance of LLMs. Introduces a novel dataset derived from an internal prediction market to evaluate LLM-based forecasting approaches.}
     {}
 
 \paper{\href{https://arxiv.org/abs/2406.11794}{DataComp-LM: In Search of the Next Generation of Training Sets for Language Models}}
-    {J.\ Li, A.\ Fang, G.\ Smyrnis, M.\ Ivgi, M.\ Jordan, \ldots\ \textbf{Sarah Pratt}, \ldots\ V.\ Shankar (59 authors)\enspace$\cdot$\enspace\textit{NeurIPS 2024 (Datasets Track)}}
+    {J.\ Li, A.\ Fang, G.\ Smyrnis, M.\ Ivgi, M.\ Jordan, \ldots\ \textbf{Sarah Pratt}, \ldots\ V.\ Shankar (59 authors)\enspace$\cdot$\enspace NeurIPS 2024 (Datasets Track)}
     {A testbed and benchmark for designing high-quality training sets for language models.}
     {}
 
 \paper{\href{https://arxiv.org/abs/2304.14108}{DataComp: In Search of the Next Generation of Multimodal Datasets}}
-    {S.\ Y.\ Gadre, G.\ Ilharco, A.\ Fang, \ldots\ \textbf{Sarah Pratt}, \ldots\ L.\ Schmidt (34 authors)\enspace$\cdot$\enspace\textit{NeurIPS 2023 (Datasets Track)}}
+    {S.\ Y.\ Gadre, G.\ Ilharco, A.\ Fang, \ldots\ \textbf{Sarah Pratt}, \ldots\ L.\ Schmidt (34 authors)\enspace$\cdot$\enspace NeurIPS 2023 (Datasets Track)}
     {A testbed for dataset experiments centered around a candidate pool of 12.8B image-text pairs for training CLIP models.}
     {}
 
 \paper{\href{https://arxiv.org/abs/2209.03320}{What Does a Platypus Look Like? Generating Customized Prompts for Zero-Shot Image Classification}}
-    {\textbf{Sarah Pratt}, I.\ Covert, R.\ Liu, A.\ Farhadi\enspace$\cdot$\enspace\textit{ICCV 2023}}
+    {\textbf{Sarah Pratt}, I.\ Covert, R.\ Liu, A.\ Farhadi\enspace$\cdot$\enspace ICCV 2023}
     {Combines open-vocabulary vision models with LLMs to generate rich descriptive prompts for zero-shot image classification, improving accuracy across a range of benchmarks including over one percentage point on ImageNet.}
     {}
 
 \paper{\href{https://arxiv.org/abs/2201.00411}{The Introspective Agent: Interdependence of Strategy, Physiology, and Sensing for Embodied Agents}}
-    {\textbf{Sarah Pratt}, L.\ Weihs, A.\ Farhadi\enspace$\cdot$\enspace\textit{2022}}
+    {\textbf{Sarah Pratt}, L.\ Weihs, A.\ Farhadi\enspace$\cdot$\enspace2022}
     {Demonstrates that sensory and physical ability affect how much agents benefit from increased planning capacity, and reproduces the optimal ability combinations observed in biological organisms.}
     {}
 
 \paper{\href{https://arxiv.org/abs/1912.08195}{Learning Generalizable Visual Representations via Interactive Gameplay}}
-    {L.\ Weihs, A.\ Kembhavi, K.\ Ehsani, \textbf{Sarah Pratt}, W.\ Han, A.\ Herrasti, E.\ Kolve, D.\ Schwenk, R.\ Mottaghi, A.\ Farhadi\enspace$\cdot$\enspace\textit{ICLR 2021 (Oral Presentation)}}
+    {L.\ Weihs, A.\ Kembhavi, K.\ Ehsani, \textbf{Sarah Pratt}, W.\ Han, A.\ Herrasti, E.\ Kolve, D.\ Schwenk, R.\ Mottaghi, A.\ Farhadi\enspace$\cdot$\enspace ICLR 2021 (Oral Presentation)}
     {Visual representations learned through interactive gameplay in simulated environments transfer effectively to downstream vision tasks.}
     {}
 
 \paper{\href{https://arxiv.org/abs/2003.12058}{Grounded Situation Recognition}}
-    {\textbf{Sarah Pratt}, M.\ Yatskar, L.\ Weihs, A.\ Farhadi, A.\ Kembhavi\enspace$\cdot$\enspace\textit{ECCV 2020 (Spotlight)}}
+    {\textbf{Sarah Pratt}, M.\ Yatskar, L.\ Weihs, A.\ Farhadi, A.\ Kembhavi\enspace$\cdot$\enspace ECCV 2020 (Spotlight)}
     {Extends situation recognition by requiring models to not only identify the activity in an image but also visually ground all participating roles, localizing the agents and objects involved in the action.}
     {}
 
