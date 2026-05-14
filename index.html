@@ -201,16 +201,28 @@
         }
 
         /* Robot idle animations */
+        .robot-svg {
+            animation: robotBounce 2.6s ease-in-out infinite;
+        }
+
+        @keyframes robotBounce {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-5px); }
+        }
+
         .robot-eyes {
-            animation: lookAround 5s ease-in-out infinite;
+            animation: lookAround 6s ease-in-out infinite;
             transform-origin: center;
         }
 
         @keyframes lookAround {
-            0%, 30%   { transform: translateX(0); }
-            40%, 50%  { transform: translateX(-3px); }
-            60%, 75%  { transform: translateX(3px); }
-            85%, 100% { transform: translateX(0); }
+            0%, 22%   { transform: translate(0, 0); }
+            28%, 34%  { transform: translate(-3px, 0); }
+            42%, 48%  { transform: translate(0, 0); }
+            54%, 62%  { transform: translate(3px, 0); }
+            70%, 75%  { transform: translate(0, 0); }
+            82%, 92%  { transform: translate(0, -3px); }
+            100%      { transform: translate(0, 0); }
         }
 
         .robot-bar {
@@ -223,6 +235,16 @@
         @keyframes barPulse {
             0%, 100% { opacity: 0.4; }
             50%      { opacity: 1; }
+        }
+
+        /* Generating state: more energetic */
+        .generating .robot-svg     { animation-duration: 0.6s; }
+        .generating .robot-eyes    { animation: eyeBlink 0.5s steps(2) infinite; }
+        .generating .robot-bar     { animation-duration: 0.35s; }
+
+        @keyframes eyeBlink {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50%      { transform: translateY(0); opacity: 0.2; }
         }
 
         .highlight {
@@ -936,35 +958,36 @@
                 </div>
 
                 <!-- Robot and Speech Bubble -->
-                <div class="robot-section">
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <div class="robot-svg">
-                            <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <line x1="50" y1="10" x2="50" y2="25" stroke="#2d2d2d" stroke-width="3" stroke-linecap="round"/>
-                                <circle cx="50" cy="8" r="3" fill="#2d2d2d"/>
-                                <rect x="25" y="25" width="50" height="35" fill="white" stroke="#2d2d2d" stroke-width="3"/>
-                                <g class="robot-eyes">
-                                    <circle cx="37" cy="40" r="3" fill="#2d2d2d"/>
-                                    <circle cx="63" cy="40" r="3" fill="#2d2d2d"/>
-                                </g>
-                                <line x1="40" y1="50" x2="60" y2="50" stroke="#2d2d2d" stroke-width="2" stroke-linecap="round"/>
-                                <rect x="20" y="60" width="60" height="30" fill="white" stroke="#2d2d2d" stroke-width="3"/>
-                                <rect x="30" y="68" width="40" height="14" fill="#2d2d2d"/>
-                                <rect class="robot-bar b1" x="33" y="71" width="25" height="2" fill="#00ff00"/>
-                                <rect class="robot-bar b2" x="33" y="75" width="20" height="2" fill="#ff00ff"/>
-                                <rect class="robot-bar b3" x="33" y="79" width="22" height="2" fill="#00ffff"/>
-                            </svg>
+                <div class="robot-section" id="robotSection">
+                    <div class="robot-svg">
+                        <svg width="140" height="140" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <line x1="50" y1="10" x2="50" y2="25" stroke="#2d2d2d" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="50" cy="8" r="3" fill="#2d2d2d"/>
+                            <rect x="25" y="25" width="50" height="35" fill="white" stroke="#2d2d2d" stroke-width="3"/>
+                            <g class="robot-eyes">
+                                <circle cx="37" cy="40" r="3" fill="#2d2d2d"/>
+                                <circle cx="63" cy="40" r="3" fill="#2d2d2d"/>
+                            </g>
+                            <line x1="40" y1="50" x2="60" y2="50" stroke="#2d2d2d" stroke-width="2" stroke-linecap="round"/>
+                            <rect x="20" y="60" width="60" height="30" fill="white" stroke="#2d2d2d" stroke-width="3"/>
+                            <rect x="30" y="68" width="40" height="14" fill="#2d2d2d"/>
+                            <rect class="robot-bar b1" x="33" y="71" width="25" height="2" fill="#00ff00"/>
+                            <rect class="robot-bar b2" x="33" y="75" width="20" height="2" fill="#ff00ff"/>
+                            <rect class="robot-bar b3" x="33" y="79" width="22" height="2" fill="#00ffff"/>
+                        </svg>
+                    </div>
+                    ${gameData.descriptionShown ? `
+                        <div class="speech-bubble-container">
+                            <div class="bubble-tail"></div>
+                            <div class="speech-bubble">
+                                <p class="bubble-text" id="typewriterText"></p>
+                            </div>
                         </div>
-                        <button class="robot-toggle" id="generateBtn" onclick="generateDescription()">
+                    ` : `
+                        <button class="robot-toggle robot-generate-btn" id="generateBtn" onclick="generateDescription()">
                             Press to generate a description of a ${round.targetName}
                         </button>
-                    </div>
-                    <div class="speech-bubble-container">
-                        <div class="bubble-tail"></div>
-                        <div class="speech-bubble">
-                            <p class="bubble-text" id="typewriterText"></p>
-                        </div>
-                    </div>
+                    `}
                 </div>
 
                 <!-- Polaroid Options -->
@@ -1020,9 +1043,10 @@
                     index++;
                 } else {
                     clearInterval(timer);
-                    // Remove cursor when done
-                    textElement.innerHTML = fullText.replace(new RegExp(round.targetName, 'g'), 
+                    textElement.innerHTML = fullText.replace(new RegExp(round.targetName, 'g'),
                         `<span class="highlight">${round.targetName}</span>`);
+                    const section = document.getElementById('robotSection');
+                    if (section) section.classList.remove('generating');
                 }
             }, 30);
         }
@@ -1030,8 +1054,22 @@
         function generateDescription() {
             if (gameData.descriptionShown) return;
             gameData.descriptionShown = true;
+
+            const section = document.getElementById('robotSection');
+            section.classList.add('generating');
+
+            // Swap the button for an empty speech bubble in place.
             const btn = document.getElementById('generateBtn');
-            if (btn) btn.disabled = true;
+            if (btn) {
+                btn.outerHTML = `
+                    <div class="speech-bubble-container">
+                        <div class="bubble-tail"></div>
+                        <div class="speech-bubble">
+                            <p class="bubble-text" id="typewriterText"></p>
+                        </div>
+                    </div>
+                `;
+            }
             startTypewriter();
         }
 
