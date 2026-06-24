@@ -207,6 +207,52 @@
             box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
         }
 
+        /* Feedback message above the photos */
+        .game-feedback {
+            text-align: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2d2d2d;
+            min-height: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* Back / Skip controls */
+        .game-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .game-nav-btn {
+            padding: 12px 28px;
+            background-color: white;
+            color: #2d2d2d;
+            border: 3px solid #2d2d2d;
+            border-radius: 4px;
+            font-family: 'Space Mono', monospace;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .game-nav-btn:hover {
+            background-color: #00ff00;
+            border-color: #00ff00;
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .game-nav-btn:active {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+        }
+
         .robot-toggle:disabled {
             opacity: 0.5;
             cursor: not-allowed;
@@ -965,6 +1011,21 @@
                         { id: 'newfoundland', name: 'Newfoundland', imagePath: 'images/Newfoundland.JPEG' },
                         { id: 'samoyed', name: 'Samoyed', imagePath: 'images/Samoyed.JPEG' }
                     ]
+                },
+                {
+                    target: 'sarah',
+                    targetName: 'Sarah',
+                    title: 'Find the <span class="highlight">Person on the Job Market</span>',
+                    generateLabel: 'Press to generate a description of Sarah Pratt',
+                    descriptions: [
+                        'Sarah Pratt is a PhD candidate at the University of Washington working multi-modal language models and scalable RL environments. She sometimes wears a blue hat.'
+                    ],
+                    options: [
+                        { id: 'sarah', name: 'Sarah', imagePath: 'images/sarah_hat.jpg' },
+                        { id: 'mousse', name: 'Mousse', imagePath: 'images/mousse.JPG' },
+                        { id: 'louise', name: 'Louise', imagePath: 'images/louise.PNG' },
+                        { id: 'transformer', name: 'Transformer Block from Vaswani et. al. (2017)', imagePath: 'images/transformer.png' }
+                    ]
                 }
             ],
             currentRound: 0,
@@ -980,7 +1041,7 @@
             container.innerHTML = `
                 <!-- Title -->
                 <div class="game-title">
-                    <h1>Find the <span class="highlight">${round.targetName}</span></h1>
+                    <h1>${round.title ? round.title : `Find the <span class="highlight">${round.targetName}</span>`}</h1>
                     <p>Use the LLM descriptions to improve your own image recognition!</p>
                 </div>
 
@@ -1015,11 +1076,14 @@
                             </div>
                         ` : `
                             <button class="robot-toggle robot-generate-btn" id="generateBtn" onclick="generateDescription()">
-                                Press to generate a description of a ${round.targetName}
+                                ${round.generateLabel ? round.generateLabel : `Press to generate a description of a ${round.targetName}`}
                             </button>
                         `}
                     </div>
                 </div>
+
+                <!-- Win/lose feedback above the photos -->
+                <div class="game-feedback" id="gameFeedback">&nbsp;</div>
 
                 <!-- Polaroid Options -->
                 <div class="polaroid-container" id="polaroidContainer">
@@ -1036,10 +1100,16 @@
                     `).join('')}
                 </div>
 
+                <!-- Back / Skip controls -->
+                <div class="game-controls">
+                    <button class="game-nav-btn" onclick="prevRound()">← Back</button>
+                    <button class="game-nav-btn" onclick="skipRound()">Skip →</button>
+                </div>
+
                 <!-- Footer -->
                 <div style="text-align: center; margin-top: 60px;">
                     <p style="color: #666; font-size: 14px; font-family: 'Space Mono', monospace;">
-                        All images from ImageNet.
+                        All images from ImageNet (except final round).
                     </p>
                 </div>
             `;
@@ -1129,6 +1199,15 @@
             const photoArea = document.getElementById(`photo-${animalId}`);
             const animalName = round.options.find(opt => opt.id === animalId).name;
 
+            const feedback = document.getElementById('gameFeedback');
+            if (feedback) {
+                if (gameData.isCorrect) {
+                    feedback.innerHTML = `You found the <span class="highlight">${round.targetName}</span>!`;
+                } else {
+                    feedback.innerHTML = `No, this is a <span class="highlight">${animalName}</span>! Try again or see if a description helps`;
+                }
+            }
+
             if (gameData.isCorrect) {
                 polaroid.classList.add('correct');
                 photoArea.classList.add('correct-answer');
@@ -1178,6 +1257,24 @@
             gameData.isCorrect = null;
             gameData.descriptionShown = false;
             renderGame();
+        }
+
+        function goToRound(index) {
+            clearTimeout(gameData.pendingTimeout);
+            const total = gameData.rounds.length;
+            gameData.currentRound = (index + total) % total;
+            gameData.selectedAnimal = null;
+            gameData.isCorrect = null;
+            gameData.descriptionShown = false;
+            renderGame();
+        }
+
+        function prevRound() {
+            goToRound(gameData.currentRound - 1);
+        }
+
+        function skipRound() {
+            goToRound(gameData.currentRound + 1);
         }
 
         // Initialize game on load
